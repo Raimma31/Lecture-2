@@ -1,0 +1,25 @@
+function plotSin2D3D(f1, f2)
+% creates 2D and 3D plot of z
+
+x = linspace(0, 2*pi, 100);
+y = x; % same range for y
+[X, Y] = meshgrid(x,y);
+
+Z = sin(f1 * X) + sin(f2 * Y);
+
+figure;
+% top subplot: imagesc
+subplot(2,1,1)
+imagesc(x, y, Z);
+colormap autumn;
+colorbar;
+axis xy;
+
+% bottom subplo0t: 3D surf
+subplot(2,1,2)
+surf(X, Y, Z);
+shading interp % smoother surface
+xlabel('X');
+ylabel('Y');
+zlabel('Z');
+title('3D Surface Plot of Z')
