@@ -1,0 +1,49 @@
+% polynomial fitting
+
+xVal = [-1 0 2];
+yVal = [0 -1 3];
+ 
+% Construct the system Ax=y
+A = [xVal(1)^2 xVal(1) 1; ...  % point (-1,0)
+    xVal(2)^2 xVal(2) 1; ...   % point (0,-1)
+    xVal(3)^2 xVal(3) 1]; ...   % point (2,3)
+
+y = yVal'; % Column vector of y-values
+
+% solve for x = [a b c]
+x = A \ y;
+
+% Extract coefficients
+a = x(1);
+b = x(2);
+c = x(3);
+
+%% using polynomials 
+
+p2 = polyfit(xVal, yVal, 2); % finds the best 2nd order polynomial that fits the points
+figure;
+plot(xVal, yVal, 'o', 'MarkerSize', 8);
+hold on;
+x = -3:0.1:3;
+plot(x, polyval(p2, x), 'r-');
+
+
+clear; close all; clc
+
+% Ex 3: Minimization
+% f = @(x) cos(4*x).*sin(10*x).*exp(-abs(x));
+f = @myfun; 
+x_min = fminbnd(@myfun, -pi, pi);
+
+figure;
+x = linspace(-pi, pi, 500);
+plot(x, f(x));
+hold on:
+xlabel('x');
+ylabel('y');
+title('Local minimum of f(x) on [-\pi, \pi]');
+
+
+function f = myfun(x)
+f = cos (4*x).*sin(10*x).*exp(-abs(x));
+end
