@@ -1,0 +1,63 @@
+% helloworld.m
+
+% disp('Hello World!')
+% disp('I am going to learn MATLAB')
+
+%% Ex 2
+load startTime.mat
+disp(['I started learning MATLAB on ' startString])
+
+%% Ex 4
+secPerDay = 86400;   % 24 x 60 x 60 seconds in a day
+tau = 1.5 * secPerDay;   % 1.5 days in seconds 
+endofClass = 8 * secPerDay  % 8 days in seconds
+
+knowledgeAtEnd = 1 - exp (-endofClass / tau);
+disp([' At the end of SM-2302, I will know' num2str(knowledgeAtEnd*100) '% of MATLAB.'])
+
+%% Ex 6
+secPerMin = 60;
+secPerHour = 60 * secPerMin;
+secPerDay = 24 * secPerHour;
+secPerMonth = 30.5*secPerDay;
+secPerYear = 12*secPerMonth;
+
+secondConversion = [secPerYear, secPerMonth, secPerDay, secPerHour, secPerMin, 1];
+
+load startTime.mat
+currentTime = clock;                % 1x6 size vector
+elapsedTime = currentTime - start;
+t = secondConversion * elapsedTime';   %seconds (1x6 * 6x1)
+
+%% Ex 7
+secPerDay = 86400;   % 24 x 60 x 60 seconds in a day
+tau = 1.5 * secPerDay;   % 1.5 days in seconds
+
+currentknowledge= 1- exp(-t/tau);
+disp(['At this time, I know' num2str(currentknowledge*100) '% of MATLAB.'])
+
+%% Ex 8
+
+secPerDay = 86400; 
+tau = 1.5 * secPerDay
+endofClass =  8 * secPerDay
+
+tVec = linspace(0, endofClass, 1000);  % in seconds
+knowledgeAtEnd = 1 - exp(-tVec./tau);
+
+%% Ex 9
+
+[~, idx] = min(abs (knowledgeAtEnd-0.5));
+halfTime = tVec(idx);
+daysOfHalf = halfTime / secPerDay;
+
+disp(['I will know half of MATLAB after ' num2str(daysOfHalf) ' days.'])
+
+%% Ex 10
+
+figure;
+plot(tVec ./ secPerDay, knowledgeAtEnd);
+
+xlabel('Time (days)')
+ylabel ('Knowledge fraction')
+title('Learning Trajectory');
