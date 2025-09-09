@@ -1,0 +1,105 @@
+>> rng(0)
+>> rand(1)
+
+ans =
+
+    0.8147
+
+>> rand(1)
+
+ans =
+
+    0.9058
+
+>> rng(0); rand(1)
+
+ans =
+
+    0.8147
+
+
+% Example 1: brwn.m
+
+rng(2);                % for reproducibility
+N = 1000;              % number of steps
+pos = zeros(1, N+1);   % initialize positions over time
+
+for k = 2:N+1
+    % generate a random step: -1 if rand<0.5, else +1
+    if rand < 0.5
+        pos (k) = pos(k-1) - 1;
+    else
+        pos (k) = pos(k-1) + 1;
+    end 
+end
+
+% Histogram of visited positions (50 bins)
+figure;
+histogram(pos, 50);
+xlabel('Positions');
+ylabel('Counts');
+title('Visited positions');
+
+% Plot trajectory
+figure;
+plot(0:N, pos, 'LineWidth', 1)
+xlabel('Step');
+ylabel('Position');
+title('1D Random Walk');
+
+
+ Example 2: sentGen.m
+
+% Create the 2x3 cell array;
+C = {'Alice', 'Bob', 'Carl';            % Row 1 = names
+     'brilliant', 'kind', 'funny'       % Row 2 = adjectives
+     };
+
+% Random indices in {1,2,3}
+iName = randi(3);    % name index
+iAdj = randi(3);     % adjective index
+
+% Access with curly braces to get contents:
+name = C{1,iName};
+adj = C{2,iAdj};
+
+% Print string:
+sentence = name  + " is " + adj + ".";
+disp(sentence)
+
+
+clear; close all; clc
+
+% Example 3: sentGen_struct.m
+% Struct-based version of sentGen.m
+
+% Use the same 2x3 cell array from example 2:
+C = {'Alice', 'Bob', 'Carl';            % Row 1 = names
+     'brilliant', 'kind', 'funny'       % Row 2 = adjectives
+     };
+
+% Bonus fields - add age and childAge like in the noptes
+ages = [32, 27, 18];         % Vector
+childAges = {[2; 4], 1, []};  % cell array
+
+% Construct the struct array
+S = struct;
+for k = 1;3
+    S(k).name = C{1, k};
+    S(k).adj = C{2, k};
+    S(k).age = ages(k);
+    S(k).childAge = childAges{k}
+end
+
+% Pick a random person to describe
+id = randi(3);
+
+% Display descriptive sentence
+fprintf('%s is %s, age %d. \n', S(id).name, S(id).adj, S(id).age);
+
+% Sho0w child age if any
+if ~isempty(S(id).childAge)
+    fprintf('Their children are aged: %s \n', mat2str(S(id).childAge))
+else
+    fprintf('They have no children. \n');
+end
