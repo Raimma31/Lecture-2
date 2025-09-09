@@ -1,3 +1,84 @@
+function plotSin(f1,f2)
+% plotSin plots a sine wave with frequency f1  over the interval [0,2pi]
+% using 16 samples per period 
+
+if nargin == 1
+  % Determine the total number of samples
+  samplesPerPeriod = 16;
+  n = samplesPerPeriod * f1;
+  % create the x-vector over [0,2pi]
+  x = linspace(0, 2*pi, n);
+  % compute the sine wave
+  y = sin(x);
+  % Plot the result
+  plot(x, y, 'b-')
+  xlabel('x')
+  ylabel('sin(f_1)')
+
+elseif nargin == 2
+    %disp('Two inputs were given')
+    figure;
+    % First subplot
+    subplot(2,1,1)
+    samples1= 16*f1;
+    x1 = linspace(0, 2*pi, samples1);
+    y1 = sin(f1*x1);
+    plot(x1, y1, 'r--s', 'LineWidth', 2, 'MarkerFaceColor', 'k', 'MarkerSize', 6);
+    xlabel('x')
+    title(['f_1 = ' num2str(f1)]);
+
+    % Second subplot
+    subplot(2,1,2)
+    samples2= 16*f2
+    x2 = linspace(0, 2*pi, samples2);
+    y2 = sin(f2*x2)
+    plot(x2, y2, 'r--s', 'LineWidth', 2, 'MarkerFaceColor', 'k', 'MarkerSize', 6);
+    xlabel('x')
+    title(['f_2 = ' num2str(f2)]);
+end 
+
+
+function plotSin(f1,f2)
+% plotSin plots a sine wave with frequency f1  over the interval [0,2pi]
+% using 16 samples per period 
+
+if nargin == 1
+  % Determine the total number of samples
+  samplesPerPeriod = 16;
+  n = samplesPerPeriod * f1;
+  % create the x-vector over [0,2pi]
+  x = linspace(0, 2*pi, n);
+  % compute the sine wave
+  y = sin(x);
+  % Plot the result
+  plot(x, y, 'b-')
+  xlabel('x')
+  ylabel('sin(f_1)')
+
+elseif nargin == 2
+    %disp('Two inputs were given')
+    figure;
+    % First subplot
+    subplot(2,1,1)
+    samples1= 16*f1
+    x1 = linspace(0, 2*pi, samples1);
+    y1 = sin(f2*x2)
+    plot(x1, y1, 'r--s', 'LineWidth', 2, 'MakerFaceColor', 'k', 'MakerSize', 6);
+    xlabel('x')
+    title(['f_1 = ' num2str(f1)]);
+
+    % Second subplot
+    subplot(2,1,1)
+    samples1= 16*f1
+    x2 = linspace(0, 2*pi, samples1);
+    y2 = sin(f2*x2)
+    plot(x2, y2, 'r--s', 'LineWidth', 2, 'MakerFaceColor', 'k', 'MakerSize', 6);
+    xlabel('x')
+    title(['f_2 = ' num2str(f2)]);
+end 
+
+
+
 function plotSin2D3D(f1, f2)
 % creates 2D and 3D plot of z
 
